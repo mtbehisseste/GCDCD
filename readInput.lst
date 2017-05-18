@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 6.11		    05/18/17 04:51:47
+Microsoft (R) Macro Assembler Version 6.11		    05/19/17 00:48:02
 readInput.asm						     Page 1 - 1
 
 
@@ -89,13 +89,14 @@ readInput.asm						     Page 1 - 1
 			      C              "D + / ~ = > > ", 0dh, 0ah,
 			      C              "E . & * $ * | ", 0dh, 0ah,
 			      C              "F | ! ^ @ ? / ", 0dh, 0ah, 0
-			      C              
+			      C 
+ 000000E2 00		      C matchnumber byte 0
  00000000		      C .code 
 			      C 
- = 00000050			BufSize = 80
+ = 000003E8			BufSize = 1000
 
- 000000E2			.data 
- 000000E2 50 6C 65 61 73	inputPosition byte "Please input two position (ex. 1A1B): ", 0
+ 000000E3			.data 
+ 000000E3 50 6C 65 61 73	inputPosition byte "Please input two position (ex. 1A1B): ", 0
 	   65 20 69 6E 70
 	   75 74 20 74 77
 	   6F 20 70 6F 73
@@ -103,29 +104,29 @@ readInput.asm						     Page 1 - 1
 	   20 28 65 78 2E
 	   20 31 41 31 42
 	   29 3A 20 00
- 00000109  00000050 [		buffer byte BufSize dup(?), 0, 0
+ 0000010A  000003E8 [		buffer byte BufSize dup(?), 0, 0
 	    00
 	   ] 00 00
- 0000015B 00000000		stdInHandle handle ?
- 0000015F 00000000		bytesRead dword ?
+ 000004F4 00000000		stdInHandle handle ?
+ 000004F8 00000000		bytesRead dword ?
 
  00000000			.code
  00000000			readInput proc uses edx eax
 				    ;;printing input title
- 00000002  BA 000000E2 R	    mov edx, offset inputPosition
+ 00000002  BA 000000E3 R	    mov edx, offset inputPosition
  00000007  E8 00000000 E	    call Crlf
  0000000C  E8 00000000 E	    call WriteString
 
 				    ;;read user input
 				    invoke GetStdHandle, STD_INPUT_HANDLE
- 00000018  A3 0000015B R	    mov stdInHandle, eax
+ 00000018  A3 000004F4 R	    mov stdInHandle, eax
 				    invoke ReadConsole, stdInHandle, addr buffer, BufSize, addr bytesRead, 0
 
- 00000036  BB 00000109 R	    mov ebx, offset buffer      ;store the result in ebx to use it outside the procedure
+ 00000039  BB 0000010A R	    mov ebx, offset buffer      ;store the result in ebx to use it outside the procedure
 				    ret 
- 0000003E			readInput endp
+ 00000041			readInput endp
 				end
-Microsoft (R) Macro Assembler Version 6.11		    05/18/17 04:51:47
+Microsoft (R) Macro Assembler Version 6.11		    05/19/17 00:48:02
 readInput.asm						     Symbols 2 - 1
 
 
@@ -219,8 +220,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000163 DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000003E DWord	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000004FC DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000041 DWord	  Public  'CODE'	
 
 
 Procedures,  parameters and locals:
@@ -330,7 +331,7 @@ WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 inputHandle  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 printMap . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
-readInput  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000003E Public STDCALL
+readInput  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000041 Public STDCALL
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 
@@ -349,7 +350,7 @@ Symbols:
 @fardata . . . . . . . . . . . .	Text   	 FLAT
 @stack . . . . . . . . . . . . .	Text   	 FLAT
 ALT_MASK . . . . . . . . . . . .	Number	 00000003h   
-BufSize  . . . . . . . . . . . .	Number	 00000050h   
+BufSize  . . . . . . . . . . . .	Number	 000003E8h   
 CAPSLOCK_ON  . . . . . . . . . .	Number	 00000080h   
 CREATE_ALWAYS  . . . . . . . . .	Number	 00000002h   
 CREATE_NEW . . . . . . . . . . .	Number	 00000001h   
@@ -552,13 +553,13 @@ WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-buffer . . . . . . . . . . . . .	Byte	 00000109 _DATA	
-bytesRead  . . . . . . . . . . .	DWord	 0000015F _DATA	
+buffer . . . . . . . . . . . . .	Byte	 0000010A _DATA	
+bytesRead  . . . . . . . . . . .	DWord	 000004F8 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
-inputPosition  . . . . . . . . .	Byte	 000000E2 _DATA	
+inputPosition  . . . . . . . . .	Byte	 000000E3 _DATA	
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
 lightCyan  . . . . . . . . . . .	Number	 0000000Bh   
 lightGray  . . . . . . . . . . .	Number	 00000007h   
@@ -568,8 +569,9 @@ lightRed . . . . . . . . . . . .	Number	 0000000Ch
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 map_ans  . . . . . . . . . . . .	Byte	 00000071 _DATA	
 map_init . . . . . . . . . . . .	Byte	 00000000 _DATA	
+matchnumber  . . . . . . . . . .	Byte	 000000E2 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-stdInHandle  . . . . . . . . . .	DWord	 0000015B _DATA	
+stdInHandle  . . . . . . . . . .	DWord	 000004F4 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   

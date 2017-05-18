@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 6.11		    05/18/17 04:51:47
+Microsoft (R) Macro Assembler Version 6.11		    05/19/17 00:48:02
 main.asm						     Page 1 - 1
 
 
@@ -88,24 +88,32 @@ main.asm						     Page 1 - 1
 			      C              "D + / ~ = > > ", 0dh, 0ah,
 			      C              "E . & * $ * | ", 0dh, 0ah,
 			      C              "F | ! ^ @ ? / ", 0dh, 0ah, 0
-			      C              
+			      C 
+ 000000E2 00		      C matchnumber byte 0
  00000000		      C .code 
 			      C 
 
  = start@0			main EQU start@0
- 000000E2			.data          
+ 000000E3			.data          
 
  00000000			.code
  00000000			main proc
 				    invoke printMap, addr map_init      ;print initial map
- 0000000A  E8 00000000 E	    call readInput                      ;user input
+ 0000000A			looppoint:
+ 0000000A  A0 000000E2 R	    mov al, [matchnumber]               ;check if all items are matched
+ 0000000F  B3 12		    mov bl, 18
+ 00000011  38 D8		    cmp al, bl
+ 00000013  77 17		    ja exitpoint
+ 00000015  E8 00000000 E	    call readInput                      ;user input
 				    invoke inputHandle, ebx, addr map_init, addr map_ans    ;change map
- 0000001F  E8 00000000 E	    call clrscr
- 00000024  E8 00000000 E	    call WaitMsg
+				    ;the two parameter is for the precise address of two map
+ 0000002A  EB DE		    jmp looppoint
+ 0000002C			exitpoint:
+ 0000002C  E8 00000000 E	    call WaitMsg
 				    exit
- 00000030			main endp
+ 00000038			main endp
 				end main
-Microsoft (R) Macro Assembler Version 6.11		    05/18/17 04:51:47
+Microsoft (R) Macro Assembler Version 6.11		    05/19/17 00:48:02
 main.asm						     Symbols 2 - 1
 
 
@@ -199,8 +207,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000000E2 DWord	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000030 DWord	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000000E3 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000038 DWord	  Public  'CODE'	
 
 
 Procedures,  parameters and locals:
@@ -312,7 +320,9 @@ printMap . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 readInput  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
-start@0  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000030 Public STDCALL
+start@0  . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000038 Public STDCALL
+  looppoint  . . . . . . . . . .	L Near	 0000000A _TEXT	
+  exitpoint  . . . . . . . . . .	L Near	 0000002C _TEXT	
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 
 
@@ -546,6 +556,7 @@ magenta  . . . . . . . . . . . .	Number	 00000005h
 main . . . . . . . . . . . . . .	Text   	 start@0
 map_ans  . . . . . . . . . . . .	Byte	 00000071 _DATA	
 map_init . . . . . . . . . . . .	Byte	 00000000 _DATA	
+matchnumber  . . . . . . . . . .	Byte	 000000E2 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA

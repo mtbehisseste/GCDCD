@@ -1,6 +1,6 @@
 ;;;;print input title and read user input
 include lib.inc
-BufSize = 80
+BufSize = 1000
 
 .data 
 inputPosition byte "Please input two position (ex. 1A1B): ", 0

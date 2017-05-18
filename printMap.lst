@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 6.11		    05/18/17 04:51:47
+Microsoft (R) Macro Assembler Version 6.11		    05/19/17 00:48:02
 printMap.asm						     Page 1 - 1
 
 
@@ -89,7 +89,8 @@ printMap.asm						     Page 1 - 1
 			      C              "D + / ~ = > > ", 0dh, 0ah,
 			      C              "E . & * $ * | ", 0dh, 0ah,
 			      C              "F | ! ^ @ ? / ", 0dh, 0ah, 0
-			      C              
+			      C 
+ 000000E2 00		      C matchnumber byte 0
  00000000		      C .code 
 			      C 
 
@@ -101,7 +102,7 @@ printMap.asm						     Page 1 - 1
 				    ret
  00000016			printMap endp
 				end
-Microsoft (R) Macro Assembler Version 6.11		    05/18/17 04:51:47
+Microsoft (R) Macro Assembler Version 6.11		    05/19/17 00:48:02
 printMap.asm						     Symbols 2 - 1
 
 
@@ -195,7 +196,7 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000000E2 DWord	  Public  'DATA'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000000E3 DWord	  Public  'DATA'	
 _TEXT  . . . . . . . . . . . . .	32 Bit	 00000016 DWord	  Public  'CODE'	
 
 
@@ -541,6 +542,7 @@ lightRed . . . . . . . . . . . .	Number	 0000000Ch
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 map_ans  . . . . . . . . . . . .	Byte	 00000071 _DATA	
 map_init . . . . . . . . . . . .	Byte	 00000000 _DATA	
+matchnumber  . . . . . . . . . .	Byte	 000000E2 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA

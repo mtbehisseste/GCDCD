@@ -3,10 +3,12 @@ include lib.inc
 .data
 firstAddr dword ?
 secondAddr dword ?
+fuckingWrongInput byte "Are you serious? Please make sure you input where the position is not showed.", 0dh, 0ah, 0
 
 .code
 inputHandle proc, input: dword, mapInitaddr: dword, mapAnsaddr
 	;;analyze first input string
+start:						;label for error and re-input
 	mov eax, 0
 	mov edx, 0
 	;get the first character   
@@ -21,14 +23,19 @@ inputHandle proc, input: dword, mapInitaddr: dword, mapAnsaddr
 	shl edx, 4
 	shl eax, 1
 	add eax, edx            ;position result store in al
-
 	mov edx, mapInitaddr    
 	mov esi, mapAnsaddr
 	movzx eax, al
 	add edx, eax
+	push ecx
+	mov ecx, [edx]
+	.if cl != 5fh			;check if input has already show
+		jmp repeatinput
+	.endif
+	pop ecx
 	add esi, eax
 	mov eax, [esi]
-	mov firstAddr, esi      ;store the chosen position address
+	mov firstAddr, edx      ;store the chosen position address
 
 	push ebx
 	mov ebx, [edx]          ;change 8bits value only
@@ -56,8 +63,14 @@ inputHandle proc, input: dword, mapInitaddr: dword, mapAnsaddr
 	movzx eax, al
 	add edx, eax
 	add esi, eax
+	push ecx
+	mov ecx, [edx]
+	.if cl != 5fh			;check if input has already show
+		jmp repeatinput
+	.endif
+	pop ecx
 	mov eax, [esi]
-	mov secondAddr, esi     ;store the chosen position address
+	mov secondAddr, edx     ;store the chosen position address
 
 	push ebx
 	mov ebx, [edx]          ;change 8bits value only
@@ -74,7 +87,6 @@ inputHandle proc, input: dword, mapInitaddr: dword, mapAnsaddr
 	cmp cl, bl
 	jz same
     ;restore map if not equal
-	call clrscr
 	mov edx, firstAddr
 	mov esi, secondAddr
 	mov ebx, [edx]
@@ -83,9 +95,30 @@ inputHandle proc, input: dword, mapInitaddr: dword, mapAnsaddr
 	mov ebx, [esi]
 	mov bl, 5fh
 	mov [esi], ebx
+	jmp exitpoint
 same:
-	invoke printMap, addr map_init
-	call waitmsg
+	;counting match number
+	push eax
+	mov al, [matchnumber]
+	inc al
+	mov [matchnumber], al
+	pop eax
+exitpoint:
+	call clrscr
+	invoke printMap, mapInitaddr
 	ret
+
+repeatinput:				;printing error message
+	push edx
+	call crlf
+	mov edx, offset fuckingWrongInput
+	call writestring
+	call waitmsg
+	pop edx
+
+	call clrscr
+	invoke printMap, mapInitaddr
+	call readInput
+	jmp start
 inputHandle endp
 end

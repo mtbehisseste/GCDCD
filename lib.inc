@@ -22,5 +22,6 @@ map_ans byte "  1 2 3 4 5 6 ", 0dh, 0ah,
              "D + / ~ = > > ", 0dh, 0ah,
              "E . & * $ * | ", 0dh, 0ah,
              "F | ! ^ @ ? / ", 0dh, 0ah, 0
-             
+
+matchnumber byte 0
 .code 
