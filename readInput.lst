@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 6.11		    05/19/17 00:48:02
+Microsoft (R) Macro Assembler Version 6.11		    05/19/17 22:03:13
 readInput.asm						     Page 1 - 1
 
 
@@ -126,7 +126,7 @@ readInput.asm						     Page 1 - 1
 				    ret 
  00000041			readInput endp
 				end
-Microsoft (R) Macro Assembler Version 6.11		    05/19/17 00:48:02
+Microsoft (R) Macro Assembler Version 6.11		    05/19/17 22:03:13
 readInput.asm						     Symbols 2 - 1
 
 

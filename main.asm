@@ -7,7 +7,7 @@ main EQU start@0
 main proc
     invoke printMap, addr map_init      ;print initial map
 looppoint:
-    mov al, [matchnumber]               ;check if all items are matched
+    mov al, [matchnumber]               ;check i f all items are matched
     mov bl, 18
     cmp al, bl
     ja exitpoint

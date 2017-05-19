@@ -7,6 +7,9 @@ fuckingWrongInput byte "Are you serious? Please make sure you input where the po
 
 .code
 inputHandle proc, input: dword, mapInitaddr: dword, mapAnsaddr
+	.if [input] == 0ah
+		exit
+	.endif
 	;;analyze first input string
 start:						;label for error and re-input
 	mov eax, 0
