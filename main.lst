@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 6.11		    05/19/17 22:03:13
+Microsoft (R) Macro Assembler Version 6.11		    05/20/17 00:15:58
 main.asm						     Page 1 - 1
 
 
@@ -28,79 +28,92 @@ main.asm						     Page 1 - 1
 			      C 
  00000000		      C .data
 			      C ;initial map
- 00000000 20 20 31 20 32      C map_init byte "  1 2 3 4 5 6 ", 0dh, 0ah,
+ 00000000 20 20 31 20 32      C map_init byte '  ', '1 ', '2 ', '3 ', '4 ', '5 ', '6 ', 0dh, 0ah
 	   20 33 20 34 20
 	   35 20 36 20 0D
-	   0A 41 20 5F 20
-	   5F 20 5F 20 5F
-	   20 5F 20 5F 20
-	   0D 0A 42 20 5F
-	   20 5F 20 5F 20
-	   5F 20 5F 20 5F
-	   20 0D 0A 43 20
-	   5F 20 5F 20 5F
-	   20 5F 20 5F 20
-	   5F 20 0D 0A 44
-	   20 5F 20 5F 20
-	   5F 20 5F 20 5F
-	   20 5F 20 0D 0A
-	   45 20 5F 20 5F
+	   0A
+ 00000010  41 20 5F 20 5F     C          byte 'A ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
 	   20 5F 20 5F 20
 	   5F 20 5F 20 0D
-	   0A 46 20 5F 20
-	   5F 20 5F 20 5F
+	   0A
+ 00000020  42 20 5F 20 5F     C          byte 'B ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
 	   20 5F 20 5F 20
-	   0D 0A 00
-			      C               "A _ _ _ _ _ _ ", 0dh, 0ah,
-			      C               "B _ _ _ _ _ _ ", 0dh, 0ah,
-			      C               "C _ _ _ _ _ _ ", 0dh, 0ah,
-			      C               "D _ _ _ _ _ _ ", 0dh, 0ah,
-			      C               "E _ _ _ _ _ _ ", 0dh, 0ah,
-			      C               "F _ _ _ _ _ _ ", 0dh, 0ah, 0
+	   5F 20 5F 20 0D
+	   0A
+ 00000030  43 20 5F 20 5F     C          byte 'C ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
+	   20 5F 20 5F 20
+	   5F 20 5F 20 0D
+	   0A
+ 00000040  44 20 5F 20 5F     C          byte 'D ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
+	   20 5F 20 5F 20
+	   5F 20 5F 20 0D
+	   0A
+ 00000050  45 20 5F 20 5F     C          byte 'E ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
+	   20 5F 20 5F 20
+	   5F 20 5F 20 0D
+	   0A
+ 00000060  46 20 5F 20 5F     C          byte 'F ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
+	   20 5F 20 5F 20
+	   5F 20 5F 20 0D
+	   0A
+			      C ;   "  1 2 3 4 5 6 ", 0dh, 0ah,
+			      C ;   "A _ _ _ _ _ _ ", 0dh, 0ah,
+			      C ;   "B _ _ _ _ _ _ ", 0dh, 0ah,
+			      C ;   "C _ _ _ _ _ _ ", 0dh, 0ah,
+			      C ;   "D _ _ _ _ _ _ ", 0dh, 0ah,
+			      C ;   "E _ _ _ _ _ _ ", 0dh, 0ah,
+			      C ;   "F _ _ _ _ _ _ ", 0dh, 0ah, 0
 			      C 
 			      C ;the answer map
- 00000071 20 20 31 20 32      C map_ans byte "  1 2 3 4 5 6 ", 0dh, 0ah,
+ 00000070 20 20 31 20 32      C map_ans byte '  ', '1 ', '2 ', '3 ', '4 ', '5 ', '6 ', 0dh, 0ah
 	   20 33 20 34 20
 	   35 20 36 20 0D
-	   0A 41 20 24 20
-	   5E 20 21 20 26
-	   20 2D 20 3C 20
-	   0D 0A 42 20 3D
-	   20 3C 20 2D 20
-	   2B 20 7E 20 3A
-	   20 0D 0A 43 20
-	   25 20 3A 20 40
-	   20 3F 20 25 20
-	   2E 20 0D 0A 44
-	   20 2B 20 2F 20
-	   7E 20 3D 20 3E
-	   20 3E 20 0D 0A
-	   45 20 2E 20 26
+	   0A
+ 00000080  41 20 24 20 5E     C         byte 'A ', '$ ', '^ ', '! ', '& ', 'x ', '< ', 0dh, 0ah
+	   20 21 20 26 20
+	   78 20 3C 20 0D
+	   0A
+ 00000090  42 20 3D 20 3C     C         byte 'B ', '= ', '< ', 'x ', '+ ', '~ ', ': ', 0dh, 0ah
+	   20 78 20 2B 20
+	   7E 20 3A 20 0D
+	   0A
+ 000000A0  43 20 25 20 3A     C         byte 'C ', '% ', ': ', '@ ', '? ', '% ', '. ', 0dh, 0ah
+	   20 40 20 3F 20
+	   25 20 2E 20 0D
+	   0A
+ 000000B0  44 20 2B 20 2F     C         byte 'D ', '+ ', '/ ', '~ ', '= ', '> ', '> ', 0dh, 0ah
+	   20 7E 20 3D 20
+	   3E 20 3E 20 0D
+	   0A
+ 000000C0  45 20 2E 20 26     C         byte 'E ', '. ', '& ', '* ', '$ ', '* ', '| ', 0dh, 0ah
 	   20 2A 20 24 20
 	   2A 20 7C 20 0D
-	   0A 46 20 7C 20
-	   21 20 5E 20 40
-	   20 3F 20 2F 20
-	   0D 0A 00
-			      C              "A $ ^ ! & - < ", 0dh, 0ah,
-			      C              "B = < - + ~ : ", 0dh, 0ah,
-			      C              "C % : @ ? % . ", 0dh, 0ah,
-			      C              "D + / ~ = > > ", 0dh, 0ah,
-			      C              "E . & * $ * | ", 0dh, 0ah,
-			      C              "F | ! ^ @ ? / ", 0dh, 0ah, 0
+	   0A
+ 000000D0  46 20 7C 20 21     C         byte 'F ', '| ', '! ', '^ ', '@ ', '? ', '/ ', 0dh, 0ah
+	   20 5E 20 40 20
+	   3F 20 2F 20 0D
+	   0A
 			      C 
- 000000E2 00		      C matchnumber byte 0
+			      C ;  "  1 2 3 4 5 6 ", 0dh, 0ah,
+			      C ;  "A $ ^ ! & x < ", 0dh, 0ah,
+			      C ;  "B = < x + ~ : ", 0dh, 0ah,
+			      C ;  "C % : @ ? % . ", 0dh, 0ah,
+			      C ;  "D + / ~ = > > ", 0dh, 0ah,
+			      C ;  "E . & * $ * | ", 0dh, 0ah,
+			      C ;  "F | ! ^ @ ? / ", 0dh, 0ah, 0
+			      C 
+ 000000E0 00		      C matchnumber byte 0
  00000000		      C .code 
 			      C 
 
  = start@0			main EQU start@0
- 000000E3			.data          
+ 000000E1			.data          
 
  00000000			.code
  00000000			main proc
 				    invoke printMap, addr map_init      ;print initial map
  0000000A			looppoint:
- 0000000A  A0 000000E2 R	    mov al, [matchnumber]               ;check i f all items are matched
+ 0000000A  A0 000000E0 R	    mov al, [matchnumber]               ;check i f all items are matched
  0000000F  B3 12		    mov bl, 18
  00000011  38 D8		    cmp al, bl
  00000013  77 17		    ja exitpoint
@@ -113,7 +126,7 @@ main.asm						     Page 1 - 1
 				    exit
  00000038			main endp
 				end main
-Microsoft (R) Macro Assembler Version 6.11		    05/19/17 22:03:13
+Microsoft (R) Macro Assembler Version 6.11		    05/20/17 00:15:58
 main.asm						     Symbols 2 - 1
 
 
@@ -207,7 +220,7 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000000E3 DWord	  Public  'DATA'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000000E1 DWord	  Public  'DATA'	
 _TEXT  . . . . . . . . . . . . .	32 Bit	 00000038 DWord	  Public  'CODE'	
 
 
@@ -554,9 +567,9 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 main . . . . . . . . . . . . . .	Text   	 start@0
-map_ans  . . . . . . . . . . . .	Byte	 00000071 _DATA	
+map_ans  . . . . . . . . . . . .	Byte	 00000070 _DATA	
 map_init . . . . . . . . . . . .	Byte	 00000000 _DATA	
-matchnumber  . . . . . . . . . .	Byte	 000000E2 _DATA	
+matchnumber  . . . . . . . . . .	Byte	 000000E0 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA

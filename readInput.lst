@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 6.11		    05/19/17 22:03:13
+Microsoft (R) Macro Assembler Version 6.11		    05/20/17 00:15:58
 readInput.asm						     Page 1 - 1
 
 
@@ -29,74 +29,87 @@ readInput.asm						     Page 1 - 1
 			      C 
  00000000		      C .data
 			      C ;initial map
- 00000000 20 20 31 20 32      C map_init byte "  1 2 3 4 5 6 ", 0dh, 0ah,
+ 00000000 20 20 31 20 32      C map_init byte '  ', '1 ', '2 ', '3 ', '4 ', '5 ', '6 ', 0dh, 0ah
 	   20 33 20 34 20
 	   35 20 36 20 0D
-	   0A 41 20 5F 20
-	   5F 20 5F 20 5F
-	   20 5F 20 5F 20
-	   0D 0A 42 20 5F
-	   20 5F 20 5F 20
-	   5F 20 5F 20 5F
-	   20 0D 0A 43 20
-	   5F 20 5F 20 5F
-	   20 5F 20 5F 20
-	   5F 20 0D 0A 44
-	   20 5F 20 5F 20
-	   5F 20 5F 20 5F
-	   20 5F 20 0D 0A
-	   45 20 5F 20 5F
+	   0A
+ 00000010  41 20 5F 20 5F     C          byte 'A ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
 	   20 5F 20 5F 20
 	   5F 20 5F 20 0D
-	   0A 46 20 5F 20
-	   5F 20 5F 20 5F
+	   0A
+ 00000020  42 20 5F 20 5F     C          byte 'B ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
 	   20 5F 20 5F 20
-	   0D 0A 00
-			      C               "A _ _ _ _ _ _ ", 0dh, 0ah,
-			      C               "B _ _ _ _ _ _ ", 0dh, 0ah,
-			      C               "C _ _ _ _ _ _ ", 0dh, 0ah,
-			      C               "D _ _ _ _ _ _ ", 0dh, 0ah,
-			      C               "E _ _ _ _ _ _ ", 0dh, 0ah,
-			      C               "F _ _ _ _ _ _ ", 0dh, 0ah, 0
+	   5F 20 5F 20 0D
+	   0A
+ 00000030  43 20 5F 20 5F     C          byte 'C ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
+	   20 5F 20 5F 20
+	   5F 20 5F 20 0D
+	   0A
+ 00000040  44 20 5F 20 5F     C          byte 'D ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
+	   20 5F 20 5F 20
+	   5F 20 5F 20 0D
+	   0A
+ 00000050  45 20 5F 20 5F     C          byte 'E ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
+	   20 5F 20 5F 20
+	   5F 20 5F 20 0D
+	   0A
+ 00000060  46 20 5F 20 5F     C          byte 'F ', '_ ', '_ ', '_ ', '_ ', '_ ', '_ ', 0dh, 0ah
+	   20 5F 20 5F 20
+	   5F 20 5F 20 0D
+	   0A
+			      C ;   "  1 2 3 4 5 6 ", 0dh, 0ah,
+			      C ;   "A _ _ _ _ _ _ ", 0dh, 0ah,
+			      C ;   "B _ _ _ _ _ _ ", 0dh, 0ah,
+			      C ;   "C _ _ _ _ _ _ ", 0dh, 0ah,
+			      C ;   "D _ _ _ _ _ _ ", 0dh, 0ah,
+			      C ;   "E _ _ _ _ _ _ ", 0dh, 0ah,
+			      C ;   "F _ _ _ _ _ _ ", 0dh, 0ah, 0
 			      C 
 			      C ;the answer map
- 00000071 20 20 31 20 32      C map_ans byte "  1 2 3 4 5 6 ", 0dh, 0ah,
+ 00000070 20 20 31 20 32      C map_ans byte '  ', '1 ', '2 ', '3 ', '4 ', '5 ', '6 ', 0dh, 0ah
 	   20 33 20 34 20
 	   35 20 36 20 0D
-	   0A 41 20 24 20
-	   5E 20 21 20 26
-	   20 2D 20 3C 20
-	   0D 0A 42 20 3D
-	   20 3C 20 2D 20
-	   2B 20 7E 20 3A
-	   20 0D 0A 43 20
-	   25 20 3A 20 40
-	   20 3F 20 25 20
-	   2E 20 0D 0A 44
-	   20 2B 20 2F 20
-	   7E 20 3D 20 3E
-	   20 3E 20 0D 0A
-	   45 20 2E 20 26
+	   0A
+ 00000080  41 20 24 20 5E     C         byte 'A ', '$ ', '^ ', '! ', '& ', 'x ', '< ', 0dh, 0ah
+	   20 21 20 26 20
+	   78 20 3C 20 0D
+	   0A
+ 00000090  42 20 3D 20 3C     C         byte 'B ', '= ', '< ', 'x ', '+ ', '~ ', ': ', 0dh, 0ah
+	   20 78 20 2B 20
+	   7E 20 3A 20 0D
+	   0A
+ 000000A0  43 20 25 20 3A     C         byte 'C ', '% ', ': ', '@ ', '? ', '% ', '. ', 0dh, 0ah
+	   20 40 20 3F 20
+	   25 20 2E 20 0D
+	   0A
+ 000000B0  44 20 2B 20 2F     C         byte 'D ', '+ ', '/ ', '~ ', '= ', '> ', '> ', 0dh, 0ah
+	   20 7E 20 3D 20
+	   3E 20 3E 20 0D
+	   0A
+ 000000C0  45 20 2E 20 26     C         byte 'E ', '. ', '& ', '* ', '$ ', '* ', '| ', 0dh, 0ah
 	   20 2A 20 24 20
 	   2A 20 7C 20 0D
-	   0A 46 20 7C 20
-	   21 20 5E 20 40
-	   20 3F 20 2F 20
-	   0D 0A 00
-			      C              "A $ ^ ! & - < ", 0dh, 0ah,
-			      C              "B = < - + ~ : ", 0dh, 0ah,
-			      C              "C % : @ ? % . ", 0dh, 0ah,
-			      C              "D + / ~ = > > ", 0dh, 0ah,
-			      C              "E . & * $ * | ", 0dh, 0ah,
-			      C              "F | ! ^ @ ? / ", 0dh, 0ah, 0
+	   0A
+ 000000D0  46 20 7C 20 21     C         byte 'F ', '| ', '! ', '^ ', '@ ', '? ', '/ ', 0dh, 0ah
+	   20 5E 20 40 20
+	   3F 20 2F 20 0D
+	   0A
 			      C 
- 000000E2 00		      C matchnumber byte 0
+			      C ;  "  1 2 3 4 5 6 ", 0dh, 0ah,
+			      C ;  "A $ ^ ! & x < ", 0dh, 0ah,
+			      C ;  "B = < x + ~ : ", 0dh, 0ah,
+			      C ;  "C % : @ ? % . ", 0dh, 0ah,
+			      C ;  "D + / ~ = > > ", 0dh, 0ah,
+			      C ;  "E . & * $ * | ", 0dh, 0ah,
+			      C ;  "F | ! ^ @ ? / ", 0dh, 0ah, 0
+			      C 
+ 000000E0 00		      C matchnumber byte 0
  00000000		      C .code 
 			      C 
  = 000003E8			BufSize = 1000
 
- 000000E3			.data 
- 000000E3 50 6C 65 61 73	inputPosition byte "Please input two position (ex. 1A1B): ", 0
+ 000000E1			.data 
+ 000000E1 50 6C 65 61 73	inputPosition byte "Please input two position (ex. 1A1B): ", 0
 	   65 20 69 6E 70
 	   75 74 20 74 77
 	   6F 20 70 6F 73
@@ -104,29 +117,29 @@ readInput.asm						     Page 1 - 1
 	   20 28 65 78 2E
 	   20 31 41 31 42
 	   29 3A 20 00
- 0000010A  000003E8 [		buffer byte BufSize dup(?), 0, 0
+ 00000108  000003E8 [		buffer byte BufSize dup(?), 0, 0
 	    00
 	   ] 00 00
- 000004F4 00000000		stdInHandle handle ?
- 000004F8 00000000		bytesRead dword ?
+ 000004F2 00000000		stdInHandle handle ?
+ 000004F6 00000000		bytesRead dword ?
 
  00000000			.code
  00000000			readInput proc uses edx eax
 				    ;;printing input title
- 00000002  BA 000000E3 R	    mov edx, offset inputPosition
+ 00000002  BA 000000E1 R	    mov edx, offset inputPosition
  00000007  E8 00000000 E	    call Crlf
  0000000C  E8 00000000 E	    call WriteString
 
 				    ;;read user input
 				    invoke GetStdHandle, STD_INPUT_HANDLE
- 00000018  A3 000004F4 R	    mov stdInHandle, eax
+ 00000018  A3 000004F2 R	    mov stdInHandle, eax
 				    invoke ReadConsole, stdInHandle, addr buffer, BufSize, addr bytesRead, 0
 
- 00000039  BB 0000010A R	    mov ebx, offset buffer      ;store the result in ebx to use it outside the procedure
+ 00000039  BB 00000108 R	    mov ebx, offset buffer      ;store the result in ebx to use it outside the procedure
 				    ret 
  00000041			readInput endp
 				end
-Microsoft (R) Macro Assembler Version 6.11		    05/19/17 22:03:13
+Microsoft (R) Macro Assembler Version 6.11		    05/20/17 00:15:58
 readInput.asm						     Symbols 2 - 1
 
 
@@ -220,7 +233,7 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 DWord	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 000004FC DWord	  Public  'DATA'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 000004FA DWord	  Public  'DATA'	
 _TEXT  . . . . . . . . . . . . .	32 Bit	 00000041 DWord	  Public  'CODE'	
 
 
@@ -553,13 +566,13 @@ WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-buffer . . . . . . . . . . . . .	Byte	 0000010A _DATA	
-bytesRead  . . . . . . . . . . .	DWord	 000004F8 _DATA	
+buffer . . . . . . . . . . . . .	Byte	 00000108 _DATA	
+bytesRead  . . . . . . . . . . .	DWord	 000004F6 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
-inputPosition  . . . . . . . . .	Byte	 000000E3 _DATA	
+inputPosition  . . . . . . . . .	Byte	 000000E1 _DATA	
 lightBlue  . . . . . . . . . . .	Number	 00000009h   
 lightCyan  . . . . . . . . . . .	Number	 0000000Bh   
 lightGray  . . . . . . . . . . .	Number	 00000007h   
@@ -567,11 +580,11 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-map_ans  . . . . . . . . . . . .	Byte	 00000071 _DATA	
+map_ans  . . . . . . . . . . . .	Byte	 00000070 _DATA	
 map_init . . . . . . . . . . . .	Byte	 00000000 _DATA	
-matchnumber  . . . . . . . . . .	Byte	 000000E2 _DATA	
+matchnumber  . . . . . . . . . .	Byte	 000000E0 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-stdInHandle  . . . . . . . . . .	DWord	 000004F4 _DATA	
+stdInHandle  . . . . . . . . . .	DWord	 000004F2 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
