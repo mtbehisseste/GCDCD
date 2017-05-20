@@ -16,7 +16,6 @@ printMap proc uses eax ecx esi, map_row: dword
         inc esi
         dec ecx
     .endw
-        call crlf
     ret
 printMap endp
 end

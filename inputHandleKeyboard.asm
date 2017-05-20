@@ -57,7 +57,7 @@ up:
 	mov dh, cursor.y
 	dec dh                      ;go up
 	cmp dh, 0
-	jz waitInput
+	jz print
 	mov cursor.x, dl
 	mov cursor.y, dh
 	jmp print
@@ -77,7 +77,7 @@ down:
 	mov dh, cursor.y
 	inc dh                      ;go down
 	cmp dh, 7
-	jz waitInput
+	jz print
 	mov cursor.x, dl
 	mov cursor.y, dh
 	jmp print
@@ -96,7 +96,7 @@ left:
 	mov dh, cursor.y
 	sub dl, 2                   ;go left
 	cmp dl, 0
-	jz waitInput
+	jz print
 	mov cursor.x, dl
 	mov cursor.y, dh
 	jmp print
@@ -116,7 +116,7 @@ right:
 	mov dh, cursor.y
 	add dl, 2
 	cmp dl, 14
-	jz waitInput
+	jz print
 	mov cursor.x, dl
 	mov cursor.y, dh
 	jmp print
