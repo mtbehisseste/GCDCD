@@ -1,4 +1,4 @@
-;;;;handle the input and change the corresponding map position
+	;;;;handle the input and change the corresponding map position
 include lib.inc
 .data
 selectednumber byte 1
@@ -15,9 +15,9 @@ inputHandle proc, mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
 	add al, dl				;position result store in al
 	mov esi, mapAnsaddr
 	movzx eax, al
-	add esi, eax			;find current position in each map
+	add esi, eax				;find current position in each map
 
-	mov ebx, mapInitaddr	;check if item has already showed
+	mov ebx, mapInitaddr			;check if item has already showed
 	add ebx, eax
 	mov dl, [ebx]
 	.if dl == [esi]
@@ -35,13 +35,13 @@ inputHandle proc, mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
 	call writechar
 	pop eax
 
-	.if selectednumber == 1		;first selected item
+	.if selectednumber == 1			;first selected item
 		mov selectednumber, 2		
-		mov bl, 2				;bl used at inputHandleKeyboard proc
+		mov bl, 2			;bl used at inputHandleKeyboard proc
 		ret
 	.endif
 
-	mov selectednumber, 1		;if not matched, reset counter
+	mov selectednumber, 1			;if not matched, reset counter
 	mov bl, 0
 	ret
 inputHandle endp
@@ -64,7 +64,7 @@ judge proc, mapInitaddr: dword, mapAnsaddr: dword, firstp: dword, secondp: dword
 	add esi, secondp
 	mov [esi], al
 
-	mov dl, 0					;print right string and delay and set text color
+	mov dl, 0				;print right string and delay and set text color
 	mov dh, 8
 	call gotoxy
 	push eax
@@ -77,7 +77,7 @@ judge proc, mapInitaddr: dword, mapAnsaddr: dword, firstp: dword, secondp: dword
 	pop eax
 	jmp matched
 notmatched:
-	mov dl, 0					;print wrong string and delay and set text color
+	mov dl, 0				;print wrong string and delay and set text color
 	mov dh, 8
 	call gotoxy
 	push eax 
@@ -96,7 +96,7 @@ matched:
 printlabel:
 	call clrscr
 	invoke printMap, mapInitaddr
-	.if matchednumber == 18		;all items are matched
+	.if matchednumber == 18			;all items are matched
 		call waitmsg
 		exit
 	.endif
