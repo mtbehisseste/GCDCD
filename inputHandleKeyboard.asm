@@ -123,7 +123,9 @@ right:
 	jmp print
 ent:
 	invoke inputHandle, mapInitaddr, mapAnsaddr, cursor.x, cursor.y
-	.if bl == 2
+	.if bl == 1					;item has already showed
+		jmp waitInput
+	.elseif bl == 2				;first select
 		mov ecx, eax
 		jmp waitInput		
 	.endif
@@ -131,9 +133,12 @@ ent:
 	mov eax, 1000
 	call delay
 	pop eax
+	.if eax == ecx 
+		jmp waitInput
+	.endif
 	invoke judge, mapInitaddr, mapAnsaddr, ecx, eax		;ecx store first position, eax store second position
-	mov cursor.x, 2
-	mov cursor.y, 1
+	; mov cursor.x, 2
+	; mov cursor.y, 1
 	jmp print
 
 	ret

@@ -2,6 +2,7 @@
 include lib.inc
 .data
 selectednumber byte 1
+matchednumber byte 0
 right byte "Damn, you little lucky dumbass!", 0
 wrong byte "You are useless, no one love you.", 0
 
@@ -15,7 +16,15 @@ inputHandle proc, mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
 	mov esi, mapAnsaddr
 	movzx eax, al
 	add esi, eax			;find current position in each map
-	
+
+	mov ebx, mapInitaddr	;check if item has already showed
+	add ebx, eax
+	mov dl, [ebx]
+	.if dl == [esi]
+		mov bl, 1
+		ret
+	.endif
+
 	mov dl, x				
 	mov dh, y
 	call gotoxy
@@ -31,18 +40,9 @@ inputHandle proc, mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
 		mov bl, 2				;bl used at inputHandleKeyboard proc
 		ret
 	.endif
-	mov selectednumber, 1 		;reset counter
-	mov bl, 1
-	ret
-	
-	mov edx, mapInitaddr	;change map_init
-	add edx, eax
-	mov bl, [esi]
-	mov [edx], bl
-	;mov mapInitaddr, edx
 
-	call clrscr
-	invoke printMap, mapInitaddr
+	mov selectednumber, 1 		;if not matched, reset counter
+	mov bl, 0
 	ret
 inputHandle endp
 
@@ -90,9 +90,16 @@ notmatched:
 	pop eax
 	mov edx, offset wrong
 	call writestring
+	jmp printlabel
 matched:
+	inc matchednumber
+printlabel:
 	call clrscr
 	invoke printMap, mapInitaddr
+	.if matchednumber == 18			;all items are matched
+		call waitmsg
+		exit
+	.endif
 	ret
 judge endp
 end
