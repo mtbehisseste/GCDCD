@@ -3,6 +3,7 @@ INCLUDE Irvine32.inc
 printMap proto map_row: dword
 readInput proto
 inputHandle proto input: dword, mapInitaddr: dword, mapAnsaddr: dword
+keyboardinput proto 
 
 .data
 ;initial map
@@ -38,5 +39,15 @@ map_ans byte '  ', '1 ', '2 ', '3 ', '4 ', '5 ', '6 ', 0dh, 0ah
 ;  "E . & * $ * | ", 0dh, 0ah,
 ;  "F | ! ^ @ ? / ", 0dh, 0ah, 0
 
+;---------check if all items are matched-------
 matchnumber byte 0
+
+;---------cursor position-----------
+coor struct
+	x sbyte 0
+	y sbyte 0
+coor ends
+
+cursor coor <2,1>
+
 .code 
