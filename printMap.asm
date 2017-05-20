@@ -3,6 +3,11 @@ include lib.inc
 
 .code
 printMap proc uses eax ecx esi, map_row: dword
+    ;;reset color
+    mov eax, white + (black*16)
+    call settextcolor
+    
+    ;;print map
     mov ecx, 112
     mov esi, map_row
     .while ecx != 0
