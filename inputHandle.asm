@@ -12,7 +12,7 @@ inputHandle proc, mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
 	mov al, x				;find out item of the position in map_ans
 	mov dl,	y
 	shl dl, 4
-	add al, dl            	;position result store in al
+	add al, dl				;position result store in al
 	mov esi, mapAnsaddr
 	movzx eax, al
 	add esi, eax			;find current position in each map
@@ -41,7 +41,7 @@ inputHandle proc, mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
 		ret
 	.endif
 
-	mov selectednumber, 1 		;if not matched, reset counter
+	mov selectednumber, 1		;if not matched, reset counter
 	mov bl, 0
 	ret
 inputHandle endp
@@ -64,7 +64,7 @@ judge proc, mapInitaddr: dword, mapAnsaddr: dword, firstp: dword, secondp: dword
 	add esi, secondp
 	mov [esi], al
 
-	mov dl, 0						;print right string and delay and set text color
+	mov dl, 0					;print right string and delay and set text color
 	mov dh, 8
 	call gotoxy
 	push eax
@@ -77,7 +77,7 @@ judge proc, mapInitaddr: dword, mapAnsaddr: dword, firstp: dword, secondp: dword
 	pop eax
 	jmp matched
 notmatched:
-	mov dl, 0						;print wrong string and delay and set text color
+	mov dl, 0					;print wrong string and delay and set text color
 	mov dh, 8
 	call gotoxy
 	push eax 
@@ -96,7 +96,7 @@ matched:
 printlabel:
 	call clrscr
 	invoke printMap, mapInitaddr
-	.if matchednumber == 18			;all items are matched
+	.if matchednumber == 18		;all items are matched
 		call waitmsg
 		exit
 	.endif

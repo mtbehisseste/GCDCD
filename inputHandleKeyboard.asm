@@ -39,11 +39,11 @@ waitInput:
 	jz left
 	cmp eax, 4D00h				;right
 	jz right
-	cmp  eax, 1C0Dh			;enter
+	cmp  eax, 1C0Dh				;enter
 	jz   ent
 	jmp  waitInput
 up:
-	mov dl, cursor.x             ;reset previous cursor
+	mov dl, cursor.x			;reset previous cursor
 	mov dh, cursor.y
 	call gotoxy
 	mov al, ' '
@@ -56,14 +56,14 @@ up:
 
 	mov dl, cursor.x
 	mov dh, cursor.y
-	dec dh                      ;go up
+	dec dh						;go up
 	cmp dh, 0
 	jz print
 	mov cursor.x, dl
 	mov cursor.y, dh
 	jmp print
 down:                    
-	mov dl, cursor.x            ;reset previous cursor
+	mov dl, cursor.x			;reset previous cursor
 	mov dh, cursor.y
 	call gotoxy
 	mov al, ' '
@@ -76,14 +76,14 @@ down:
 
 	mov dl, cursor.x
 	mov dh, cursor.y
-	inc dh                      ;go down
+	inc dh						;go down
 	cmp dh, 7
 	jz print
 	mov cursor.x, dl
 	mov cursor.y, dh
 	jmp print
 left:
-	mov dl, cursor.x            ;reset previous cursor
+	mov dl, cursor.x			;reset previous cursor
 	mov dh, cursor.y
 	mov al, ' '
 	sub dl, 1
@@ -95,7 +95,7 @@ left:
 
 	mov dl, cursor.x
 	mov dh, cursor.y
-	sub dl, 2                   ;go left
+	sub dl, 2					;go left
 	cmp dl, 0
 	jz print
 	mov cursor.x, dl
