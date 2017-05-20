@@ -2,7 +2,7 @@
 include lib.inc
 
 .code
-keyboardinput proc uses ebx 
+inputHandleKeyboard proc uses ebx, mapInitaddr: dword, mapAnsaddr: dword
 	;;print cursor position
 print:
 	mov dl, cursor.x
@@ -38,8 +38,8 @@ waitInput:
 	jz left
 	cmp eax, 4D00h				;right
 	jz right
-	; cmp  eax, 1C0Dh			;enter
-	; jz   ent
+	cmp  eax, 1C0Dh			;enter
+	jz   ent
 	jmp  waitInput
 up:
 	mov dl, cursor.x             ;reset previous cursor
@@ -120,16 +120,18 @@ right:
 	mov cursor.x, dl
 	mov cursor.y, dh
 	jmp print
-; ent:
-;     mov bh, cursor.x
-;     mov bl, cursor.y
-;     inc bl 
-;     cmp bl, 0
-;     jz waitInput
-;     mov cursor.x, bh
-;     mov cursor.y, bl
-;     jmp print
+ent:
+	invoke inputHandle, mapInitaddr, mapAnsaddr, cursor.x, cursor.y
+	jmp waitInput
+    ; mov bh, cursor.x
+    ; mov bl, cursor.y
+    ; inc bl 
+    ; cmp bl, 0
+    ; jz waitInput
+    ; mov cursor.x, bh
+    ; mov cursor.y, bl
+    ; jmp print
 
 	ret
-keyboardinput endp
+inputHandleKeyboard endp
 end

@@ -6,7 +6,7 @@ main EQU start@0
 .code
 main proc
     invoke printMap, addr map_init      ;print initial map
-    call keyboardinput
+    invoke inputHandleKeyboard, addr map_init, addr map_ans
 ; looppoint:
 ;     mov al, [matchnumber]               ;check i f all items are matched
 ;     mov bl, 18

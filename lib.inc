@@ -2,8 +2,9 @@ INCLUDE Irvine32.inc
 
 printMap proto map_row: dword
 readInput proto
-inputHandle proto input: dword, mapInitaddr: dword, mapAnsaddr: dword
-keyboardinput proto 
+;inputHandle proto input: dword, mapInitaddr: dword, mapAnsaddr: dword
+inputHandle proto mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
+inputHandleKeyboard proto mapInitaddr: dword, mapAnsaddr: dword
 
 .data
 ;initial map
@@ -24,12 +25,12 @@ map_init byte '  ', '1 ', '2 ', '3 ', '4 ', '5 ', '6 ', 0dh, 0ah
 
 ;the answer map
 map_ans byte '  ', '1 ', '2 ', '3 ', '4 ', '5 ', '6 ', 0dh, 0ah
-        byte 'A ', '$ ', '^ ', '! ', '& ', 'x ', '< ', 0dh, 0ah
+        byte 'A ', '$ ', '" ', '! ', '& ', 'x ', '< ', 0dh, 0ah
         byte 'B ', '= ', '< ', 'x ', '+ ', '~ ', ': ', 0dh, 0ah
         byte 'C ', '% ', ': ', '@ ', '? ', '% ', '. ', 0dh, 0ah
         byte 'D ', '+ ', '/ ', '~ ', '= ', '> ', '> ', 0dh, 0ah
         byte 'E ', '. ', '& ', '* ', '$ ', '* ', '| ', 0dh, 0ah
-        byte 'F ', '| ', '! ', '^ ', '@ ', '? ', '/ ', 0dh, 0ah
+        byte 'F ', '| ', '! ', '" ', '@ ', '? ', '/ ', 0dh, 0ah
 
 ;  "  1 2 3 4 5 6 ", 0dh, 0ah,
 ;  "A $ ^ ! & x < ", 0dh, 0ah,
@@ -39,15 +40,17 @@ map_ans byte '  ', '1 ', '2 ', '3 ', '4 ', '5 ', '6 ', 0dh, 0ah
 ;  "E . & * $ * | ", 0dh, 0ah,
 ;  "F | ! ^ @ ? / ", 0dh, 0ah, 0
 
-;---------check if all items are matched-------
-matchnumber byte 0
-
-;---------cursor position-----------
+;---------cursor position-------------------
 coor struct
 	x sbyte 0
 	y sbyte 0
 coor ends
 
 cursor coor <2,1>
+
+;---------------------------
+matchnumber byte 0      ;counter for matched items
+isMatch byte 0          ;boolean
+selectednumber byte 1
 
 .code 
