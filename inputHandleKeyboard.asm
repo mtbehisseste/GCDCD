@@ -1,5 +1,6 @@
 ;;;;handle input with keyboard 
 include lib.inc
+.data
 
 .code
 inputHandleKeyboard proc uses ebx, mapInitaddr: dword, mapAnsaddr: dword
@@ -122,15 +123,18 @@ right:
 	jmp print
 ent:
 	invoke inputHandle, mapInitaddr, mapAnsaddr, cursor.x, cursor.y
-	jmp waitInput
-    ; mov bh, cursor.x
-    ; mov bl, cursor.y
-    ; inc bl 
-    ; cmp bl, 0
-    ; jz waitInput
-    ; mov cursor.x, bh
-    ; mov cursor.y, bl
-    ; jmp print
+	.if bl == 2
+		mov ecx, eax
+		jmp waitInput		
+	.endif
+	push eax 
+	mov eax, 1000
+	call delay
+	pop eax
+	invoke judge, mapInitaddr, mapAnsaddr, ecx, eax		;ecx store first position, eax store second position
+	mov cursor.x, 2
+	mov cursor.y, 1
+	jmp print
 
 	ret
 inputHandleKeyboard endp

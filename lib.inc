@@ -2,9 +2,9 @@ INCLUDE Irvine32.inc
 
 printMap proto map_row: dword
 readInput proto
-;inputHandle proto input: dword, mapInitaddr: dword, mapAnsaddr: dword
 inputHandle proto mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
 inputHandleKeyboard proto mapInitaddr: dword, mapAnsaddr: dword
+judge proto mapInitaddr: dword, mapAnsaddr: dword, firstp: dword, secondp: dword
 
 .data
 ;initial map
@@ -47,10 +47,5 @@ coor struct
 coor ends
 
 cursor coor <2,1>
-
-;---------------------------
-matchnumber byte 0      ;counter for matched items
-isMatch byte 0          ;boolean
-selectednumber byte 1
 
 .code 
