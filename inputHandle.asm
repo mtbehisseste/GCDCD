@@ -3,8 +3,19 @@ include lib.inc
 .data
 selectednumber byte 1
 matchednumber byte 0
-right byte "Damn, you little lucky dumbass!", 0
-wrong byte "You are useless, no one love you.", 0
+right byte "Matched!", 0
+wrong byte "Not matched!", 0
+gamewin byte "*******************************************************", 10
+		byte "*******************************************************", 10
+		byte "**                       _ _ _ _ _ _                 **", 10
+		byte "**    \ \    /  \    / / _ _ _ _ _ _ |   \    | |    **", 10
+		byte "**     \ \  / /\ \  / /      | |     |    \   | |    **", 10
+		byte "**      \ \/ /  \ \/ /       | |     | | \ \  | |    **", 10
+		byte "**       \  /    \  /    _ _ | | _ _ | |  \ \ | |    **", 10
+		byte "**        \/      \/     _ _ _ _ _ _ | |   \    |    **", 10
+		byte "**                                                   **", 10
+		byte "*******************************************************", 10
+		byte "*******************************************************", 10, 0
 
 .code
 inputHandle proc, mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
@@ -72,7 +83,7 @@ judge proc, mapInitaddr: dword, mapAnsaddr: dword, firstp: dword, secondp: dword
 	call settextcolor
 	mov edx, offset right
 	call writestring
-	mov eax, 1500
+	mov eax, 500
 	call delay
 	pop eax
 	jmp matched
@@ -85,21 +96,25 @@ notmatched:
 	call settextcolor
 	mov edx, offset wrong
 	call writestring
-	mov eax, 1500
+	mov eax, 500
 	call delay
 	pop eax
-	mov edx, offset wrong
-	call writestring
 	jmp printlabel
 matched:
 	inc matchednumber
 printlabel:
 	call clrscr
-	invoke printMap, mapInitaddr
 	.if matchednumber == 18		;all items are matched
+		mov eax, 11
+		call settextcolor
+		mov edx, offset gamewin
+		call writestring
+		mov eax, white
+		call settextcolor
 		call waitmsg
 		exit
 	.endif
+	invoke printMap, mapInitaddr
 	ret
 judge endp
 end

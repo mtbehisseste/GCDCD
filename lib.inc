@@ -5,6 +5,7 @@ readInput proto
 inputHandle proto mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
 inputHandleKeyboard proto mapInitaddr: dword, mapAnsaddr: dword
 judge proto mapInitaddr: dword, mapAnsaddr: dword, firstp: dword, secondp: dword
+timer proto 
 
 .data
 ;initial map

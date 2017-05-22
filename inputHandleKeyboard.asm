@@ -15,14 +15,14 @@ print:
 	;;print '['
 	sub dl, 1
 	call gotoxy
-	mov eax, 11
+	mov eax, 10
 	call settextcolor
 	mov al, '['
 	call writechar
 	;;print ']'
 	add dl, 2
 	call gotoxy
-	mov eax, 11
+	mov eax, 10
 	call settextcolor
 	mov al, ']'
 	call writechar
