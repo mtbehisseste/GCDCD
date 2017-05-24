@@ -27,6 +27,30 @@ print:
 	mov al, ']'
 	call writechar
 
+	push eax
+	mov eax, 7
+	call settextcolor
+	pop eax
+
+	push edx				;printing current position
+	mov dl, 0
+	mov dh, 8
+	call gotoxy
+	mov al, '['
+	call writechar
+	mov al, cursor.x
+	shr al, 1
+	add al, 48
+	call writechar
+	mov al, ','
+	call writechar
+	mov al, cursor.y
+	add al, 64
+	call writechar
+	mov al, ']'
+	call writechar
+	pop edx
+
 ;------------------------------------
 	;;read cursor input 
 waitInput:
@@ -126,21 +150,20 @@ ent:
 	.if bl == 1					;item has already showed
 		jmp waitInput
 	.elseif bl == 2				;first select
-		mov ecx, eax
+		mov ecx, eax			;mark first item
 		jmp waitInput		
 	.endif
-	push eax 
+	push eax 					;second select
 	mov eax, 1000
 	call delay
 	pop eax
-	.if eax == ecx 
+	.if eax == ecx 				;check if the current selected item is the first item
 		jmp waitInput
 	.endif
 	invoke judge, mapInitaddr, mapAnsaddr, ecx, eax		;ecx store first position, eax store second position
-	; mov cursor.x, 2
-	; mov cursor.y, 1
-	jmp print
 
+	jmp print
+	
 	ret
 inputHandleKeyboard endp
 end

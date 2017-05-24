@@ -5,17 +5,17 @@ selectednumber byte 1
 matchednumber byte 0
 right byte "Matched!", 0
 wrong byte "Not matched!", 0
-gamewin byte "*******************************************************", 10
-		byte "*******************************************************", 10
-		byte "**                       _ _ _ _ _ _                 **", 10
-		byte "**    \ \    /  \    / / _ _ _ _ _ _ |   \    | |    **", 10
-		byte "**     \ \  / /\ \  / /      | |     |    \   | |    **", 10
-		byte "**      \ \/ /  \ \/ /       | |     | | \ \  | |    **", 10
-		byte "**       \  /    \  /    _ _ | | _ _ | |  \ \ | |    **", 10
-		byte "**        \/      \/     _ _ _ _ _ _ | |   \    |    **", 10
-		byte "**                                                   **", 10
-		byte "*******************************************************", 10
-		byte "*******************************************************", 10, 0
+gamewin byte "******************************************************", 10
+		byte "******************************************************", 10
+		byte "**   _       _       _  _ _ _ _ _ _  _ _      _     **", 10
+		byte "**   \ \    /  \    / / _ _ _ _ _ _ |   \    | |    **", 10
+		byte "**    \ \  / /\ \  / /      | |     |    \   | |    **", 10
+		byte "**     \ \/ /  \ \/ /       | |     | | \ \  | |    **", 10
+		byte "**      \  /    \  /    _ _ | | _ _ | |  \ \ | |    **", 10
+		byte "**       \/      \/     _ _ _ _ _ _ |_|   \ _ _|    **", 10
+		byte "**                                                  **", 10
+		byte "******************************************************", 10
+		byte "******************************************************", 10, 0
 
 .code
 inputHandle proc, mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
@@ -104,7 +104,6 @@ matched:
 	inc matchednumber
 printlabel:
 	call clrscr
-<<<<<<< HEAD
 	.if matchednumber == 18		;all items are matched
 		mov eax, 11
 		call settextcolor
@@ -112,10 +111,7 @@ printlabel:
 		call writestring
 		mov eax, white
 		call settextcolor
-=======
-	invoke printMap, mapInitaddr
-	.if matchednumber == 18			;all items are matched
->>>>>>> 9e1cfaab57980f7d276acf7eaf3aaf81b5425028
+
 		call waitmsg
 		exit
 	.endif
