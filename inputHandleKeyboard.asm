@@ -33,6 +33,7 @@ print:
 	pop eax
 
 	push edx				;printing current position
+	push eax
 	mov dl, 0
 	mov dh, 8
 	call gotoxy
@@ -49,6 +50,7 @@ print:
 	call writechar
 	mov al, ']'
 	call writechar
+	pop eax
 	pop edx
 
 ;------------------------------------
@@ -152,14 +154,15 @@ ent:
 	.elseif bl == 2				;first select
 		mov ecx, eax			;mark first item
 		jmp waitInput		
+	.elseif bl == 3
+		jmp waitInput
 	.endif
+
 	push eax 					;second select
 	mov eax, 1000
 	call delay
 	pop eax
-	.if eax == ecx 				;check if the current selected item is the first item
-		jmp waitInput
-	.endif
+	
 	invoke judge, mapInitaddr, mapAnsaddr, ecx, eax		;ecx store first position, eax store second position
 
 	jmp print
