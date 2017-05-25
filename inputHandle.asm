@@ -28,7 +28,7 @@ inputHandle proc, mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
 	movzx eax, al
 	add esi, eax				;find current position in each map
 
-	.if eax == ecx				;if selected the same item as first time
+	.if eax == ecx				;if select the same item as first time
 		mov bl, 3
 		ret
 	.endif

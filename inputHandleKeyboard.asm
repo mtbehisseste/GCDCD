@@ -66,7 +66,9 @@ waitInput:
 	cmp eax, 4D00h				;right
 	jz right
 	cmp  eax, 1C0Dh				;enter
-	jz   ent
+	jz ent
+	cmp eax, 011Bh				;esc
+	jz escp
 	jmp  waitInput
 up:
 	mov dl, cursor.x			;reset previous cursor
@@ -154,7 +156,7 @@ ent:
 	.elseif bl == 2				;first select
 		mov ecx, eax			;mark first item
 		jmp waitInput		
-	.elseif bl == 3
+	.elseif bl == 3				;current select item is the same as first time
 		jmp waitInput
 	.endif
 
@@ -166,7 +168,8 @@ ent:
 	invoke judge, mapInitaddr, mapAnsaddr, ecx, eax		;ecx store first position, eax store second position
 
 	jmp print
-	
+escp:
+	exit
 	ret
 inputHandleKeyboard endp
 end
