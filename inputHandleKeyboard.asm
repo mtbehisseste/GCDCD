@@ -166,7 +166,7 @@ ent:
 	pop eax
 	
 	invoke judge, mapInitaddr, mapAnsaddr, ecx, eax		;ecx store first position, eax store second position
-
+	mov ecx, 0					;reset for after use
 	jmp print
 escp:
 	exit
