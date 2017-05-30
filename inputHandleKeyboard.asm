@@ -1,6 +1,10 @@
-;;;;handle input with keyboard 
+;;;;handle input with keyboard
 include lib.inc
 .data
+correct BYTE "OK I'll help you",0
+compare BYTE "-help",0
+wrong BYTE "What r u saying?",0
+buffer  BYTE 10 DUP(0)
 
 .code
 inputHandleKeyboard proc uses ebx, mapInitaddr: dword, mapAnsaddr: dword
@@ -50,6 +54,7 @@ print:
 	call writechar
 	mov al, ']'
 	call writechar
+	call crlf
 	pop eax
 	pop edx
 
@@ -65,11 +70,42 @@ waitInput:
 	jz left
 	cmp eax, 4D00h				;right
 	jz right
-	cmp  eax, 1C0Dh				;enter
+	cmp eax, 1C0Dh				;enter
 	jz ent
 	cmp eax, 011Bh				;esc
 	jz escp
+	cmp eax, 3920h				;space
+	jz help
+
 	jmp  waitInput
+help:							;Alvin Zhan
+	.if bl == 2
+		jmp print
+	.endif 
+    mov edx  , OFFSET buffer           ; 指定緩衝區  
+    mov ecx  , ( SIZEOF buffer ) - 1   ; 扣掉null，指定最大讀取字串長度
+	call readstring
+	INVOKE str_compare,ADDR buffer,ADDR compare
+	.IF ZERO?
+		mov edx,offset correct
+		call Writestring
+		mov eax,2000
+		call delay
+		call Clrscr
+		INVOKE printMap, mapAnsaddr
+		mov eax,2000
+		call delay
+		call Clrscr
+		invoke printMap, mapInitaddr      ;print initial map
+	.else
+		mov edx,offset wrong
+		call Writestring
+		mov eax,2000
+		call delay
+		call Clrscr
+		invoke printMap, mapInitaddr 
+	.endif
+	jmp print
 up:
 	mov dl, cursor.x			;reset previous cursor
 	mov dh, cursor.y

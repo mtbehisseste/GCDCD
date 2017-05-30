@@ -1,9 +1,12 @@
 INCLUDE Irvine32.inc
 
+startingframe proto
 printMap proto map_row: dword
+printans proto map:dword
 inputHandle proto mapInitaddr: dword, mapAnsaddr: dword, x: byte, y: byte
 inputHandleKeyboard proto mapInitaddr: dword, mapAnsaddr: dword
 judge proto mapInitaddr: dword, mapAnsaddr: dword, firstp: dword, secondp: dword
+
 
 .data
 ;initial map
